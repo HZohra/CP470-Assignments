@@ -1,5 +1,20 @@
 <resources>
     <string name="app_name">AndroidAssignments</string>
+
     <string name="hello_message">سلام دنیا!</string>
     <string name="ButtonText">من یک دکمه هستم</string>
+
+    <string name="login">ورود</string>
+    <string name="login_name">نام کاربری</string>
+    <string name="password">رمز عبور</string>
+
+    <string name="radio_button">دکمه رادیویی</string>
+    <string name="check_box">کادر انتخاب</string>
+    <string name="switch_question">این چه کاری انجام می‌دهد؟</string>
+    <string name="camera">دوربین</string>
+
+    <string name="go_to_login">رفتن به صفحه ورود</string>
+    <string name="go_to_list_items">رفتن به فهرست</string>
+    <string name="back_to_login">بازگشت به ورود</string>
+    <string name="go_home">رفتن به صفحه اصلی</string>
 </resources>
