@@ -1,20 +1,45 @@
+
 <resources>
     <string name="app_name">AndroidAssignments</string>
 
+    <!-- MainActivity -->
     <string name="hello_message">Hello World!</string>
     <string name="ButtonText">I\'m a button</string>
 
+    <!-- LoginActivity -->
     <string name="login">Login</string>
-    <string name="login_name">login name</string>
-    <string name="password">password</string>
+    <string name="login_name">Email address</string>
+    <string name="password">Password</string>
+    <string name="invalid_email">Please enter a valid email address</string>
+    <string name="empty_password">Password cannot be empty</string>
 
+    <!-- ListItemsActivity -->
     <string name="radio_button">RadioButton</string>
     <string name="check_box">CheckBox</string>
     <string name="switch_question">What does this do?</string>
     <string name="camera">Camera</string>
 
+    <!-- Existing navigation strings -->
     <string name="go_to_login">Go to Login</string>
     <string name="go_to_list_items">Go to List Items</string>
     <string name="back_to_login">Back to Login</string>
     <string name="go_home">Go Home</string>
+
+    <!-- Switch messages -->
+    <string name="switch_on">Switch is On</string>
+    <string name="switch_off">Switch is Off</string>
+
+    <!-- Confirmation dialog -->
+    <string name="dialog_title">Finish Activity</string>
+    <string name="dialog_message">Do you want to finish this activity?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+
+    <!-- Activity result messages -->
+    <string name="response_message">My information to share</string>
+    <string name="returned_message">ListItemsActivity passed: %1$s</string>
+
+    <!-- Camera error messages -->
+    <string name="camera_unavailable">Camera application not available</string>
+    <string name="camera_denied">Camera access denied</string>
 </resources>

@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Camera permission -->
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <!-- Allow the app to run on devices without cameras -->
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
 
     <application
         android:allowBackup="true"
@@ -12,8 +19,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AndroidAssignments">
 
+        <!-- Starting Activity -->
         <activity
-            android:name=".MainActivity"
+            android:name=".LoginActivity"
             android:exported="true"
             android:windowSoftInputMode="adjustResize">
 
@@ -24,16 +32,18 @@
 
         </activity>
 
+        <!-- Opens after login -->
         <activity
-            android:name=".LoginActivity"
+            android:name=".MainActivity"
             android:exported="false"
-            android:parentActivityName=".MainActivity"
+            android:parentActivityName=".LoginActivity"
             android:windowSoftInputMode="adjustResize" />
 
+        <!-- Opens from MainActivity -->
         <activity
             android:name=".ListItemsActivity"
             android:exported="false"
-            android:parentActivityName=".LoginActivity"
+            android:parentActivityName=".MainActivity"
             android:windowSoftInputMode="adjustResize" />
 
     </application>

@@ -1,10 +1,12 @@
 
 package com.zohrah.androidassignments;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,6 +17,7 @@ import androidx.core.view.WindowInsetsCompat;
 public class MainActivity extends AppCompatActivity {
 
     private static final String ACTIVITY_NAME = "MainActivity";
+    private static final int REQUEST_CODE = 10;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,24 +28,75 @@ public class MainActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
 
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(
-                    systemBars.left,
-                    systemBars.top,
-                    systemBars.right,
-                    systemBars.bottom
+        ViewCompat.setOnApplyWindowInsetsListener(
+                findViewById(R.id.main), (v, insets) -> {
+
+                    Insets systemBars = insets.getInsets(
+                            WindowInsetsCompat.Type.systemBars()
+                    );
+
+                    v.setPadding(
+                            systemBars.left,
+                            systemBars.top,
+                            systemBars.right,
+                            systemBars.bottom
+                    );
+
+                    return insets;
+                }
+        );
+
+        // BUTTON: Opens ListItemsActivity
+        Button listItemsButton = findViewById(R.id.button);
+
+        listItemsButton.setOnClickListener(v -> {
+
+            Intent intent = new Intent(
+                    MainActivity.this,
+                    ListItemsActivity.class
             );
-            return insets;
-        });
 
-        Button loginButton = findViewById(R.id.loginButton);
-
-        loginButton.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-            startActivity(intent);
+            startActivityForResult(intent, REQUEST_CODE);
         });
     }
+
+    // RECEIVE RESULT FROM LISTITEMSACTIVITY
+    @Override
+    protected void onActivityResult(
+            int requestCode,
+            int resultCode,
+            Intent data
+    ) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == REQUEST_CODE) {
+
+            Log.i(
+                    ACTIVITY_NAME,
+                    "Returned to MainActivity.onActivityResult"
+            );
+
+            if (resultCode == Activity.RESULT_OK && data != null) {
+
+                String messagePassed = data.getStringExtra("Response");
+
+                if (messagePassed != null) {
+
+                    // Display the message using the selected language
+                    Toast.makeText(
+                            MainActivity.this,
+                            getString(
+                                    R.string.returned_message,
+                                    messagePassed
+                            ),
+                            Toast.LENGTH_LONG
+                    ).show();
+                }
+            }
+        }
+    }
+
+    // ACTIVITY LIFECYCLE METHODS
 
     @Override
     protected void onStart() {
