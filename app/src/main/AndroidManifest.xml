@@ -19,7 +19,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AndroidAssignments">
 
-        <!-- Starting Activity -->
+        <!-- Starting Activity: LoginActivity -->
         <activity
             android:name=".LoginActivity"
             android:exported="true"
@@ -32,16 +32,23 @@
 
         </activity>
 
-        <!-- Opens after login -->
+        <!-- MainActivity opens after LoginActivity -->
         <activity
             android:name=".MainActivity"
             android:exported="false"
             android:parentActivityName=".LoginActivity"
             android:windowSoftInputMode="adjustResize" />
 
-        <!-- Opens from MainActivity -->
+        <!-- ListItemsActivity opens from MainActivity -->
         <activity
             android:name=".ListItemsActivity"
+            android:exported="false"
+            android:parentActivityName=".MainActivity"
+            android:windowSoftInputMode="adjustResize" />
+
+        <!-- Part 3: ChatWindow opens from MainActivity -->
+        <activity
+            android:name=".ChatWindow"
             android:exported="false"
             android:parentActivityName=".MainActivity"
             android:windowSoftInputMode="adjustResize" />

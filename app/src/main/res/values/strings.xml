@@ -1,10 +1,14 @@
-
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">AndroidAssignments</string>
 
     <!-- MainActivity -->
     <string name="hello_message">Hello World!</string>
     <string name="ButtonText">I\'m a button</string>
+
+    <!-- Part 3: Chat buttons -->
+    <string name="start_chat">Start Chat</string>
+    <string name="send">Send</string>
 
     <!-- LoginActivity -->
     <string name="login">Login</string>
@@ -42,4 +46,8 @@
     <!-- Camera error messages -->
     <string name="camera_unavailable">Camera application not available</string>
     <string name="camera_denied">Camera access denied</string>
+
+
+    <string name="message_hint">Type a message...</string>
+
 </resources>

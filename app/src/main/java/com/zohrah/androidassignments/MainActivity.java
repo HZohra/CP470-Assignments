@@ -1,4 +1,3 @@
-
 package com.zohrah.androidassignments;
 
 import android.app.Activity;
@@ -46,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
                 }
         );
 
-        // BUTTON: Opens ListItemsActivity
+        // PART 1 & 2: Open ListItemsActivity
         Button listItemsButton = findViewById(R.id.button);
 
         listItemsButton.setOnClickListener(v -> {
@@ -57,6 +56,23 @@ public class MainActivity extends AppCompatActivity {
             );
 
             startActivityForResult(intent, REQUEST_CODE);
+        });
+
+        // PART 3: Open ChatWindow
+        Button startChatButton = findViewById(R.id.startChatButton);
+
+        startChatButton.setOnClickListener(v -> {
+
+            // Log button click
+            Log.i(ACTIVITY_NAME, "User clicked Start Chat");
+
+            // Open the chat activity
+            Intent intent = new Intent(
+                    MainActivity.this,
+                    ChatWindow.class
+            );
+
+            startActivity(intent);
         });
     }
 
@@ -82,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
 
                 if (messagePassed != null) {
 
-                    // Display the message using the selected language
+                    // Display message using selected language
                     Toast.makeText(
                             MainActivity.this,
                             getString(
