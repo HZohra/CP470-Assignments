@@ -5,7 +5,7 @@
     <!-- Item 1: Display Snackbar -->
     <item
         android:id="@+id/action_item1"
-        android:title="Item 1"
+        android:title="@string/toolbar_item1"
         android:icon="@drawable/toolbar_info"
         android:orderInCategory="101"
         app:showAsAction="always" />
@@ -13,7 +13,7 @@
     <!-- Item 2: Display confirmation dialog -->
     <item
         android:id="@+id/action_item2"
-        android:title="Item 2"
+        android:title="@string/toolbar_item2"
         android:icon="@drawable/toolbar_back"
         android:orderInCategory="102"
         app:showAsAction="always" />
@@ -21,15 +21,15 @@
     <!-- Item 3: Change Snackbar message -->
     <item
         android:id="@+id/action_item3"
-        android:title="Item 3"
+        android:title="@string/toolbar_item3"
         android:icon="@drawable/toolbar_edit"
         android:orderInCategory="103"
         app:showAsAction="always" />
 
-    <!-- About: Displayed in the three-dot overflow menu -->
+    <!-- About: Overflow menu only -->
     <item
         android:id="@+id/action_about"
-        android:title="About"
+        android:title="@string/toolbar_about"
         android:orderInCategory="104"
         app:showAsAction="never" />
 
