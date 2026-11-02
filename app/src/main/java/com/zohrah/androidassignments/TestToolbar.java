@@ -1,4 +1,3 @@
-
 package com.zohrah.androidassignments;
 
 import android.os.Bundle;
@@ -15,23 +14,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-import androidx.navigation.NavController;
-import androidx.navigation.fragment.NavHostFragment;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.zohrah.androidassignments.databinding.ActivityTestToolbarBinding;
 
 public class TestToolbar extends AppCompatActivity {
 
-    // Existing navigation configuration
-    private AppBarConfiguration appBarConfiguration;
+    // PART 4: Message displayed by toolbar Item 1
+    private String snackbarMessage;
 
-    // PART 4: Snackbar message that Item 3 can change
-    private String snackbarMessage = "You selected Item 1";
-
-    // Existing activity binding
+    // Activity binding for toolbar and floating action button
     private ActivityTestToolbarBinding binding;
 
     @Override
@@ -39,9 +31,11 @@ public class TestToolbar extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
 
-        // Existing view binding
         binding = ActivityTestToolbarBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        // Initialize the Snackbar message using the current language
+        snackbarMessage = getString(R.string.toolbar_default_snackbar);
 
         // Existing edge-to-edge window insets
         ViewCompat.setOnApplyWindowInsetsListener(
@@ -62,38 +56,14 @@ public class TestToolbar extends AppCompatActivity {
                 }
         );
 
-        // Existing toolbar setup
+        // Connect the custom toolbar
         setSupportActionBar(binding.toolbar);
 
-        // Existing navigation setup
-        NavHostFragment navHostFragment =
-                (NavHostFragment) getSupportFragmentManager()
-                        .findFragmentById(
-                                R.id.nav_host_fragment_content_test_toolbar
-                        );
-
-        if (navHostFragment != null) {
-
-            NavController navController =
-                    navHostFragment.getNavController();
-
-            appBarConfiguration =
-                    new AppBarConfiguration.Builder(
-                            navController.getGraph()
-                    ).build();
-
-            NavigationUI.setupActionBarWithNavController(
-                    this,
-                    navController,
-                    appBarConfiguration
-            );
-        }
-
-        // Existing Floating Action Button functionality
+        // PART 4: Floating Action Button with translated Snackbar
         binding.fab.setOnClickListener(
                 view -> Snackbar.make(
                                 view,
-                                "Replace with your own action",
+                                R.string.toolbar_fab_snackbar,
                                 Snackbar.LENGTH_LONG
                         )
                         .setAnchorView(R.id.fab)
@@ -102,25 +72,21 @@ public class TestToolbar extends AppCompatActivity {
         );
     }
 
-    // PART 4: Display toolbar menu items
+    // Display the three toolbar icons and About menu
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
-        getMenuInflater().inflate(
-                R.menu.toolbar_menu,
-                menu
-        );
-
+        getMenuInflater().inflate(R.menu.toolbar_menu, menu);
         return true;
     }
 
-    // PART 4: Handle toolbar menu clicks
+    // Handle toolbar menu selections
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
         int itemId = item.getItemId();
 
-        // Item 1: Show Snackbar
+        // Item 1: Display Snackbar
         if (itemId == R.id.action_item1) {
 
             Snackbar.make(
@@ -132,16 +98,15 @@ public class TestToolbar extends AppCompatActivity {
             return true;
         }
 
-        // Item 2: Show confirmation dialog
+        // Item 2: Confirmation dialog
         else if (itemId == R.id.action_item2) {
 
             new AlertDialog.Builder(this)
-                    .setTitle("Finish Activity")
-                    .setMessage("Do you want to go back?")
-                    .setPositiveButton("Yes", (dialog, which) -> {
+                    .setTitle(R.string.toolbar_dialog_title)
+                    .setPositiveButton(R.string.yes, (dialog, which) -> {
                         finish();
                     })
-                    .setNegativeButton("No", (dialog, which) -> {
+                    .setNegativeButton(R.string.no, (dialog, which) -> {
                         dialog.dismiss();
                     })
                     .show();
@@ -149,20 +114,19 @@ public class TestToolbar extends AppCompatActivity {
             return true;
         }
 
-        // PART 4: Item 3 opens custom dialog
+        // Item 3: Open custom message dialog
         else if (itemId == R.id.action_item3) {
 
             showChangeMessageDialog();
-
             return true;
         }
 
-        // About: Show app information
+        // About: Display application information
         else if (itemId == R.id.action_about) {
 
             Toast.makeText(
                     this,
-                    "Version 1.0, by Zohra Haidary",
+                    R.string.toolbar_about_message,
                     Toast.LENGTH_LONG
             ).show();
 
@@ -172,74 +136,43 @@ public class TestToolbar extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    // PART 4: Custom dialog for changing Snackbar message
+    // Custom dialog for changing the Snackbar message
     private void showChangeMessageDialog() {
 
-        // Load the custom XML layout
         View dialogView = getLayoutInflater().inflate(
                 R.layout.dialog_change_message,
                 null
         );
 
-        // Find the EditText inside the dialog
         EditText newMessageEditText =
                 dialogView.findViewById(R.id.newMessageEditText);
 
-        // Display current Snackbar message in the input field
+        // Display the current Snackbar message
         newMessageEditText.setText(snackbarMessage);
 
-        // Create and display the dialog
         new AlertDialog.Builder(this)
                 .setView(dialogView)
-                .setPositiveButton("OK", (dialog, which) -> {
+                .setPositiveButton(R.string.toolbar_ok, (dialog, which) -> {
 
-                    // Read the new message entered by the user
                     String newMessage = newMessageEditText
                             .getText()
                             .toString()
                             .trim();
 
-                    // Update Snackbar message if input is not empty
                     if (!newMessage.isEmpty()) {
 
                         snackbarMessage = newMessage;
 
                         Toast.makeText(
                                 TestToolbar.this,
-                                "Snackbar message updated",
+                                R.string.toolbar_message_updated,
                                 Toast.LENGTH_SHORT
                         ).show();
                     }
                 })
-                .setNegativeButton("Cancel", (dialog, which) -> {
+                .setNegativeButton(R.string.toolbar_cancel, (dialog, which) -> {
                     dialog.dismiss();
                 })
                 .show();
-    }
-
-    // Existing navigation method — unchanged
-    @Override
-    public boolean onSupportNavigateUp() {
-
-        NavHostFragment navHostFragment =
-                (NavHostFragment) getSupportFragmentManager()
-                        .findFragmentById(
-                                R.id.nav_host_fragment_content_test_toolbar
-                        );
-
-        boolean handled = false;
-
-        if (navHostFragment != null) {
-
-            NavController navController =
-                    navHostFragment.getNavController();
-
-            handled = NavigationUI.navigateUp(
-                    navController,
-                    appBarConfiguration
-            );
-        }
-
-        return handled || super.onSupportNavigateUp();
     }
 }

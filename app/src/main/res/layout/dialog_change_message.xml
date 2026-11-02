@@ -11,10 +11,23 @@
         android:id="@+id/dialogTitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Change Snackbar Message"
+        android:text="@string/toolbar_change_message_title"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- PART 4: Custom downloaded icon -->
+    <ImageView
+        android:id="@+id/dialogMessageIcon"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginTop="16dp"
+        android:src="@drawable/dialog_message"
+        android:contentDescription="@string/toolbar_message_icon_description"
+        android:scaleType="fitCenter"
+        app:layout_constraintTop_toBottomOf="@id/dialogTitle"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -24,9 +37,9 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
-        android:text="Enter a new message for Item 1:"
+        android:text="@string/toolbar_change_message_description"
         android:textSize="14sp"
-        app:layout_constraintTop_toBottomOf="@id/dialogTitle"
+        app:layout_constraintTop_toBottomOf="@id/dialogMessageIcon"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -36,7 +49,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
-        android:hint="New Message"
+        android:hint="@string/toolbar_new_message_hint"
         android:inputType="textCapSentences"
         android:maxLines="3"
         android:minHeight="48dp"
