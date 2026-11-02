@@ -24,12 +24,11 @@
             android:name=".LoginActivity"
             android:exported="true"
             android:windowSoftInputMode="adjustResize">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
 
         <!-- MainActivity opens after LoginActivity -->
@@ -52,7 +51,11 @@
             android:exported="false"
             android:parentActivityName=".MainActivity"
             android:windowSoftInputMode="adjustResize" />
-
+        <activity
+            android:name=".TestToolbar"
+            android:exported="false"
+            android:theme="@style/Theme.AndroidAssignments.NoActionBar"
+            android:windowSoftInputMode="adjustResize" />
     </application>
 
 </manifest>

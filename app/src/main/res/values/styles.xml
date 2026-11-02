@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- PART 4: Reusable style for buttons -->
+    <style name="AssignmentButtonStyle">
+
+        <!-- Button height -->
+        <item name="android:layout_height">48dp</item>
+
+        <!-- Padding inside buttons -->
+        <item name="android:paddingStart">20dp</item>
+        <item name="android:paddingEnd">20dp</item>
+        <item name="android:paddingTop">8dp</item>
+        <item name="android:paddingBottom">8dp</item>
+
+        <!-- Margins outside buttons -->
+        <item name="android:layout_marginTop">16dp</item>
+        <item name="android:layout_marginBottom">8dp</item>
+
+        <!-- Font size -->
+        <item name="android:textSize">14sp</item>
+
+        <!-- Font colour -->
+        <item name="android:textColor">#FFFFFF</item>
+
+    </style>
+
+</resources>

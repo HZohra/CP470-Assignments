@@ -1,3 +1,4 @@
+
 <resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Base application theme. -->
@@ -6,6 +7,16 @@
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
     </style>
 
+    <!-- Existing application theme -->
     <style name="Theme.AndroidAssignments" parent="Base.Theme.AndroidAssignments" />
+
+    <!-- PART 4: Theme for TestToolbar without the default ActionBar -->
+    <style name="Theme.AndroidAssignments.NoActionBar"
+        parent="Theme.AndroidAssignments">
+
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+
+    </style>
 
 </resources>
