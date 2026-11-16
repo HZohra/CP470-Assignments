@@ -152,6 +152,7 @@ public class ExampleInstrumentedTest {
     }
 
     // TEST 8: Multiple chat messages
+
     @Test
     public void multipleMessages_areDisplayed() {
         try (ActivityScenario<ChatWindow> scenario =
@@ -175,31 +176,57 @@ public class ExampleInstrumentedTest {
             onView(withId(R.id.sendButton))
                     .perform(click());
 
-            onView(withText("First message"))
-                    .check(matches(isDisplayed()));
+            scenario.onActivity(activity -> {
+                ListView list =
+                        activity.findViewById(R.id.chatListView);
 
-            onView(withText("Second message"))
-                    .check(matches(isDisplayed()));
+                int count = list.getAdapter().getCount();
+
+                assertTrue(count >= 2);
+
+                assertEquals(
+                        "First message",
+                        list.getAdapter().getItem(count - 2)
+                );
+
+                assertEquals(
+                        "Second message",
+                        list.getAdapter().getItem(count - 1)
+                );
+            });
         }
     }
 
+
     // TEST 9: Empty messages are rejected
+
     @Test
     public void emptyMessage_isNotAdded() {
         try (ActivityScenario<ChatWindow> scenario =
                      ActivityScenario.launch(ChatWindow.class)) {
 
-            onView(withId(R.id.sendButton))
-                    .perform(click());
-
             scenario.onActivity(activity -> {
                 ListView list =
                         activity.findViewById(R.id.chatListView);
 
-                assertEquals(0, list.getAdapter().getCount());
+                int before = list.getAdapter().getCount();
+
+                android.widget.EditText input =
+                        activity.findViewById(R.id.chatTextInput);
+
+                android.widget.Button send =
+                        activity.findViewById(R.id.sendButton);
+
+                input.setText("   ");
+                send.performClick();
+
+                int after = list.getAdapter().getCount();
+
+                assertEquals(before, after);
             });
         }
     }
+
 
     // TEST 10: Back navigation from ChatWindow
     @Test

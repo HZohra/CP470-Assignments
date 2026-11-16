@@ -1,6 +1,13 @@
 package com.zohrah.androidassignments;
 
 import android.content.Context;
+import android.content.ContentValues;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
+import android.util.Log;
+import android.widget.Toast;
+
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,6 +38,9 @@ public class ChatWindow extends AppCompatActivity {
 
     // Custom adapter
     private ChatAdapter messageAdapter;
+
+    private static final String ACTIVITY_NAME = "ChatWindow";
+    private SQLiteDatabase db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,31 +77,195 @@ public class ChatWindow extends AppCompatActivity {
         messageAdapter = new ChatAdapter(this);
         listView.setAdapter(messageAdapter);
 
-        // Handle Send button
+
+// Assignment 3 - Open SQLite database
+        try {
+            ChatDatabaseHelper dbHelper =
+                    new ChatDatabaseHelper(this);
+
+            db = dbHelper.getWritableDatabase();
+
+            Log.i(ACTIVITY_NAME, "Database opened successfully");
+
+            // Retrieve all previously saved messages
+            loadMessages();
+
+        } catch (SQLiteException e) {
+            Log.e(ACTIVITY_NAME, "Database error", e);
+
+            Toast.makeText(
+                    this,
+                    "Unable to open chat database",
+                    Toast.LENGTH_LONG
+            ).show();
+
+            sendButton.setEnabled(false);
+        }
+
+
+
+
+        // Handle Send button and save messages to SQLite
         sendButton.setOnClickListener(v -> {
 
             String message = textInput.getText().toString();
 
-            // Validate, clean, and add the message
-            boolean messageAdded =
-                    ChatMessageUtils.addMessage(messages, message);
+            // Reject empty or whitespace-only messages
+            if (!ChatMessageUtils.isValidMessage(message)) {
+                return;
+            }
 
-            // Only update the screen when a valid message is added
-            if (messageAdded) {
+            String cleanedMessage =
+                    ChatMessageUtils.cleanMessage(message);
+
+            if (db == null || !db.isOpen()) {
+                Toast.makeText(
+                        this,
+                        "Database unavailable",
+                        Toast.LENGTH_SHORT
+                ).show();
+                return;
+            }
+
+            // Prepare data for SQLite
+            ContentValues values = new ContentValues();
+
+            values.put(
+                    ChatDatabaseHelper.KEY_MESSAGE,
+                    cleanedMessage
+            );
+
+            try {
+                // Save message in the database
+                long id = db.insertOrThrow(
+                        ChatDatabaseHelper.TABLE_NAME,
+                        null,
+                        values
+                );
+
+                // Add saved message to the ArrayList
+                ChatMessageUtils.addMessage(
+                        messages,
+                        cleanedMessage
+                );
+
+                Log.i(
+                        ACTIVITY_NAME,
+                        "Saved SQL MESSAGE: " + cleanedMessage
+                                + ", ID=" + id
+                );
 
                 // Refresh the ListView
                 messageAdapter.notifyDataSetChanged();
 
-                // Scroll to the newest message
+                // Scroll to newest message
                 listView.smoothScrollToPosition(
                         messages.size() - 1
                 );
 
-                // Clear the input field
+                // Clear the input
                 textInput.setText("");
+
+            } catch (SQLiteException e) {
+                Log.e(ACTIVITY_NAME, "Failed to save message", e);
+
+                Toast.makeText(
+                        this,
+                        "Message could not be saved",
+                        Toast.LENGTH_SHORT
+                ).show();
             }
         });
+
     }
+
+    // Assignment 3 - Load saved messages from SQLite
+    private void loadMessages() {
+
+        try (Cursor cursor = db.query(
+                ChatDatabaseHelper.TABLE_NAME,
+                new String[]{
+                        ChatDatabaseHelper.KEY_ID,
+                        ChatDatabaseHelper.KEY_MESSAGE
+                },
+                null,
+                null,
+                null,
+                null,
+                ChatDatabaseHelper.KEY_ID + " ASC"
+        )) {
+
+            // Log the number of columns
+            Log.i(
+                    ACTIVITY_NAME,
+                    "Cursor's column count = " +
+                            cursor.getColumnCount()
+            );
+
+            // Log every column name
+            for (int i = 0; i < cursor.getColumnCount(); i++) {
+                Log.i(
+                        ACTIVITY_NAME,
+                        "Cursor column " + i + " = " +
+                                cursor.getColumnName(i)
+                );
+            }
+
+            // Find the MESSAGE column
+            int messageColumn =
+                    cursor.getColumnIndexOrThrow(
+                            ChatDatabaseHelper.KEY_MESSAGE
+                    );
+
+            messages.clear();
+
+            // Read and display each saved message
+            while (cursor.moveToNext()) {
+
+                String message =
+                        cursor.getString(messageColumn);
+
+                Log.i(
+                        ACTIVITY_NAME,
+                        "SQL MESSAGE: " + message
+                );
+
+                messages.add(message);
+            }
+
+            // Update the chat ListView
+            messageAdapter.notifyDataSetChanged();
+
+            if (!messages.isEmpty()) {
+                listView.setSelection(messages.size() - 1);
+            }
+
+            Log.i(
+                    ACTIVITY_NAME,
+                    "Loaded " + messages.size() +
+                            " messages from SQLite"
+            );
+        }
+    }
+
+
+    @Override
+    protected void onDestroy() {
+
+        if (db != null && db.isOpen()) {
+            db.close();
+
+            Log.i(
+                    ACTIVITY_NAME,
+                    "Database closed in onDestroy"
+            );
+        }
+
+        super.onDestroy();
+
+        Log.i(ACTIVITY_NAME, "onDestroy() called");
+    }
+
 
     // Custom adapter for chat messages
     private class ChatAdapter extends ArrayAdapter<String> {
