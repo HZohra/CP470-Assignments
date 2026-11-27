@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <!-- Selected message aligned to the right -->
+    <TextView
+        android:id="@+id/messageDetailsText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:gravity="right"
+        android:textSize="20sp"
+        android:layout_marginBottom="16dp"
+        tools:text="Hello!" />
+
+    <!-- Database ID -->
+    <TextView
+        android:id="@+id/messageIdText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/messageDetailsText"
+        android:textSize="16sp"
+        tools:text="Message ID: 1" />
+
+    <!-- Delete selected message -->
+    <Button
+        android:id="@+id/deleteMessageButton"
+        style="@style/AssignmentButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:text="@string/delete_message" />
+
+</RelativeLayout>

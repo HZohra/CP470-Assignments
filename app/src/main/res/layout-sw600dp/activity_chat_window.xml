@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="8dp"
+    tools:context=".ChatWindow">
+
+    <!-- Chat messages on the left -->
+    <ListView
+        android:id="@+id/chatListView"
+        android:layout_width="300dp"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_above="@id/sendButton"
+        android:dividerHeight="4dp"
+        android:transcriptMode="alwaysScroll" />
+
+    <!-- Send button below the chat list -->
+    <Button
+        android:id="@+id/sendButton"
+        style="@style/AssignmentButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_alignRight="@id/chatListView"
+        android:layout_alignParentBottom="true"
+        android:text="@string/send" />
+
+    <!-- Message input -->
+    <EditText
+        android:id="@+id/chatTextInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:layout_toLeftOf="@id/sendButton"
+        android:hint="@string/message_hint"
+        android:inputType="textCapSentences|textMultiLine"
+        android:maxLines="4" />
+
+    <!-- Assignment 3 Part 3: Fragment container -->
+    <FrameLayout
+        android:id="@+id/messageFragmentContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_toRightOf="@id/chatListView"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="16dp" />
+
+</RelativeLayout>

@@ -93,4 +93,15 @@
 
     <string name="weather_loading">در حال دریافت اطلاعات آب و هوا…</string>
     <string name="weather_error">دریافت اطلاعات آب و هوا ممکن نیست. لطفاً دوباره تلاش کنید.</string>
+
+    <!-- Assignment 3 Part 3: Message details -->
+    <string name="message_details">جزئیات پیام</string>
+    <string name="message_id">شناسه پیام: %1$d</string>
+    <string name="delete_message">حذف این پیام</string>
+    <string name="message_deleted">پیام حذف شد</string>
+    <string name="message_delete_error">حذف پیام ممکن نیست</string>
+    <string name="database_open_error">باز کردن پایگاه داده ممکن نیست</string>
+    <string name="database_unavailable">پایگاه داده در دسترس نیست</string>
+    <string name="message_save_error">ذخیره پیام ممکن نیست</string>
+
 </resources>

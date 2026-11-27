@@ -94,4 +94,14 @@
 
     <string name="weather_loading">Loading weather information…</string>
     <string name="weather_error">Unable to retrieve weather information. Please try again.</string>
+
+    <!-- Assignment 3 Part 3: Message details -->
+    <string name="message_details">Message Details</string>
+    <string name="message_id">Message ID: %1$d</string>
+    <string name="delete_message">Delete this message</string>
+    <string name="message_deleted">Message deleted</string>
+    <string name="message_delete_error">Unable to delete message</string>
+    <string name="database_open_error">Unable to open chat database</string>
+    <string name="database_unavailable">Database unavailable</string>
+    <string name="message_save_error">Message could not be saved</string>
 </resources>
