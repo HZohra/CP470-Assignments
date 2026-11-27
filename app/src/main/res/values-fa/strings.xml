@@ -76,4 +76,21 @@
     <!-- Part 4: About -->
     <string name="toolbar_about_message">نسخه ۱.۰، ساخته شده توسط زهره حیدری</string>
 
+
+    <!-- Assignment 3 Part 2: Weather Forecast -->
+    <string name="weather_forecast">پیش‌بینی آب و هوا</string>
+    <string name="select_city">یک شهر کانادا را انتخاب کنید</string>
+    <string name="weather_city">%1$s، کانادا</string>
+    <string name="weather_icon_description">نماد وضعیت فعلی آب و هوا</string>
+
+    <string name="current_temperature">دمای فعلی: %1$s °C</string>
+    <string name="min_temperature">حداقل دما: %1$s °C</string>
+    <string name="max_temperature">حداکثر دما: %1$s °C</string>
+
+    <string name="current_temperature_placeholder">دمای فعلی: -- °C</string>
+    <string name="min_temperature_placeholder">حداقل دما: -- °C</string>
+    <string name="max_temperature_placeholder">حداکثر دما: -- °C</string>
+
+    <string name="weather_loading">در حال دریافت اطلاعات آب و هوا…</string>
+    <string name="weather_error">دریافت اطلاعات آب و هوا ممکن نیست. لطفاً دوباره تلاش کنید.</string>
 </resources>

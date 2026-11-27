@@ -4,6 +4,9 @@
     <!-- Camera permission -->
     <uses-permission android:name="android.permission.CAMERA" />
 
+    <!-- Assignment 3 Part 2: Internet permission -->
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <!-- Allow the app to run on devices without cameras -->
     <uses-feature
         android:name="android.hardware.camera"
@@ -24,11 +27,12 @@
             android:name=".LoginActivity"
             android:exported="true"
             android:windowSoftInputMode="adjustResize">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
 
         <!-- MainActivity opens after LoginActivity -->
@@ -45,17 +49,28 @@
             android:parentActivityName=".MainActivity"
             android:windowSoftInputMode="adjustResize" />
 
-        <!-- Part 3: ChatWindow opens from MainActivity -->
+        <!-- ChatWindow opens from MainActivity -->
         <activity
             android:name=".ChatWindow"
             android:exported="false"
             android:parentActivityName=".MainActivity"
             android:windowSoftInputMode="adjustResize" />
+
+        <!-- Assignment 2 Part 4: Toolbar Activity -->
         <activity
             android:name=".TestToolbar"
             android:exported="false"
             android:theme="@style/Theme.AndroidAssignments.NoActionBar"
             android:windowSoftInputMode="adjustResize" />
+
+        <!-- Assignment 3 Part 2: Weather Forecast -->
+        <activity
+            android:name=".WeatherForecast"
+            android:exported="false"
+            android:label="@string/weather_forecast"
+            android:parentActivityName=".MainActivity"
+            android:windowSoftInputMode="adjustResize" />
+
     </application>
 
 </manifest>

@@ -20,11 +20,11 @@
         android:dividerHeight="4dp"
         android:transcriptMode="alwaysScroll" />
 
-    <!-- Send button positioned at bottom-right -->
+    <!-- Send button with reusable button style -->
     <Button
         android:id="@+id/sendButton"
+        style="@style/AssignmentButtonStyle"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:text="@string/send" />

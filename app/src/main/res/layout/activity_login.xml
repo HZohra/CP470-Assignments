@@ -45,10 +45,11 @@
         android:textAlignment="viewStart"
         android:gravity="start" />
 
+    <!-- Apply reusable button style -->
     <Button
         android:id="@+id/loginButton"
+        style="@style/AssignmentButtonStyle"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:text="@string/login" />
 
 </LinearLayout>

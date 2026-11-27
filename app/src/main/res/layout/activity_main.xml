@@ -13,8 +13,8 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
         android:text="@string/hello_message"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -39,13 +39,50 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- PART 4: Test Toolbar button -->
+    <!-- Part 4: Test Toolbar button -->
     <Button
         android:id="@+id/testToolbarButton"
         style="@style/AssignmentButtonStyle"
         android:layout_width="wrap_content"
         android:text="@string/test_toolbar"
         app:layout_constraintTop_toBottomOf="@id/startChatButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Assignment 3 Part 2: City selection label -->
+    <TextView
+        android:id="@+id/selectCityLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/select_city"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:labelFor="@id/citySpinner"
+        app:layout_constraintTop_toBottomOf="@id/testToolbarButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Canadian cities dropdown -->
+    <Spinner
+        android:id="@+id/citySpinner"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="48dp"
+        android:layout_marginEnd="48dp"
+        android:layout_marginTop="8dp"
+        android:spinnerMode="dropdown"
+        app:layout_constraintTop_toBottomOf="@id/selectCityLabel"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Weather Forecast button -->
+    <Button
+        android:id="@+id/weatherForecastButton"
+        style="@style/AssignmentButtonStyle"
+        android:layout_width="wrap_content"
+        android:text="@string/weather_forecast"
+        app:layout_constraintTop_toBottomOf="@id/citySpinner"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 

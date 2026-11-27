@@ -1,10 +1,13 @@
+
 package com.zohrah.androidassignments;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -17,6 +20,9 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String ACTIVITY_NAME = "MainActivity";
     private static final int REQUEST_CODE = 10;
+
+    // Assignment 3 Part 2: Intent key for selected city
+    public static final String EXTRA_CITY_NAME = "cityName";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,10 +69,8 @@ public class MainActivity extends AppCompatActivity {
 
         startChatButton.setOnClickListener(v -> {
 
-            // Log button click
             Log.i(ACTIVITY_NAME, "User clicked Start Chat");
 
-            // Open the chat activity
             Intent intent = new Intent(
                     MainActivity.this,
                     ChatWindow.class
@@ -86,6 +90,55 @@ public class MainActivity extends AppCompatActivity {
                     MainActivity.this,
                     TestToolbar.class
             );
+
+            startActivity(intent);
+        });
+
+        // Assignment 3 Part 2: Configure weather controls
+        setupWeatherForecast();
+    }
+
+    // Configure Canadian cities dropdown and weather button
+    private void setupWeatherForecast() {
+
+        Spinner citySpinner = findViewById(R.id.citySpinner);
+
+        // Load Canadian cities from arrays.xml
+        ArrayAdapter<CharSequence> cityAdapter =
+                ArrayAdapter.createFromResource(
+                        this,
+                        R.array.canadian_cities,
+                        android.R.layout.simple_spinner_item
+                );
+
+        // Set the appearance of dropdown items
+        cityAdapter.setDropDownViewResource(
+                android.R.layout.simple_spinner_dropdown_item
+        );
+
+        citySpinner.setAdapter(cityAdapter);
+
+        Button weatherForecastButton =
+                findViewById(R.id.weatherForecastButton);
+
+        weatherForecastButton.setOnClickListener(v -> {
+
+            // Retrieve the selected Canadian city
+            String selectedCity =
+                    citySpinner.getSelectedItem().toString();
+
+            Log.i(
+                    ACTIVITY_NAME,
+                    "Weather Forecast selected for: " + selectedCity
+            );
+
+            // Launch WeatherForecast with selected city
+            Intent intent = new Intent(
+                    MainActivity.this,
+                    WeatherForecast.class
+            );
+
+            intent.putExtra(EXTRA_CITY_NAME, selectedCity);
 
             startActivity(intent);
         });
@@ -113,7 +166,6 @@ public class MainActivity extends AppCompatActivity {
 
                 if (messagePassed != null) {
 
-                    // Display message using selected language
                     Toast.makeText(
                             MainActivity.this,
                             getString(
